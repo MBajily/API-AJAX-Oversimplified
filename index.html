@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AJAX</title>
+</head>
+<body>
+
+	<button onclick="getRepos()">Get Repos</button>
+	<script type="text/javascript">
+		
+		// Make function to do the request 
+		function getRepos(){
+			// Assign the request object to variable
+			var myRequest = new XMLHttpRequest();
+
+			// On ready state change => function called when ready state change
+			myRequest.onreadystatechange = function() {
+
+				// =============================================
+				// Ready state steps:
+				// 0 => Request not initialized
+				// 1 => Server connection established
+				// 2 => Request recieved
+				// 3 => Processing Request
+				// 4 => Request is finished and request is ready
+				// =============================================
+
+				// If request is finished and request is ready and status code is 200 (ok) get response
+				if (this.readyState === 4 && this.status === 200){
+					// console.log(this.responseText);
+					// console.log(myRequest)
+
+					// Convert ResponseText to js object
+					var myJsObject = JSON.parse(this.responseText);
+					var myText = '';
+
+					for (var i = 0; i < myJsObject.length; i++) {
+						console.log(myJsObject[i].username);
+						myText = myText + myJsObject[i].username + "<br>";
+						console.log(myText);
+					}
+					document.getElementById('show').innerHTML = myText
+				}
+			};
+
+			// XMLHttpRequest.open(method, url, async, user, password)
+			myRequest.open(
+				'GET', 
+				'object.json', 
+				true
+				);
+			myRequest.send();
+		}
+
+	</script>
+</body>
+</html>
