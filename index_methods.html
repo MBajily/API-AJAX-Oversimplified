@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="jquery-3.6.0.min.js"></script>
+
+	<title>jQuery</title>
+</head>
+<body>
+	<button>Get Info</button>
+
+	<div id="show"></div>
+
+	
+	<script type="text/javascript">
+		$(function() {
+			$("button").on("click", function(){
+                // $.get("getName.php?name=Mohammed", function(data, status, HttpRequest) {
+                //     console.log(data);
+                //     console.log(status);
+                //     console.log(HttpRequest);
+                // })
+
+                $.post("getName.php", {name:"Mohammed"}, function(data, status, HttpRequest) {
+                    console.log(data);
+                    console.log(status);
+                    console.log(HttpRequest);
+                })
+                
+			})
+		});
+	</script>
+</body>
+</html>
