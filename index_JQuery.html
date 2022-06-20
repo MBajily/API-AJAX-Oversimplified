@@ -3,18 +3,27 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+	<script src="jquery-3.6.0.min.js"></script>
 
 	<title>jQuery</title>
 </head>
 <body>
+	<button data-page="demo.html">Get demo one</button>
+	<button data-page="demo2.html">Get demo two</button>
 
 	<div id="show"></div>
 
-	<script src="jquery-3.6.0.min.js"></script>
+	
 	<script type="text/javascript">
 		$(function() {
-			$("#show").load("demo.html .head");
+			$("button").on("click", function(){
+				$("#show").load($(this).data("page") + " .head", function(responseText, status, HttpRequest) {
+					if (status === "success"){
+						console.log("Data Loaded");
+					}
+				});
+			})
+			
 		});
 	</script>
 </body>
